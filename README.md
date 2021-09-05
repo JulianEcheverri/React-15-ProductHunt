@@ -18,3 +18,7 @@ This is a clone site for Product Hunt page. Using Next.js, React & Firebase
 - npm install @emotion/core
 - npm install @emotion/styled
 - npm babel-plugin-emotion
+
+##### Using firebase for db
+- npm install firebase
+- npm i firebase-admin

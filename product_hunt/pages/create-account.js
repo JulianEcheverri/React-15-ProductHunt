@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
-import { Form, Div, Submit } from "../components/ui/Form";
+import { Form, Div, Submit, Error } from "../components/ui/Form";
 import { css } from "@emotion/react";
 
 // Validations
@@ -14,7 +14,7 @@ const CreateAccount = () => {
     password: ''
   };
 
-  const { values, errors, submitForm, handleChange, handleSubmit } = useValidation(initialState, validateCreateAccount, createAccount);
+  const { values, errors, submitForm, handleChange, handleSubmit, handleBlur } = useValidation(initialState, validateCreateAccount, createAccount);
   const { name, email, password } = values;
 
   function createAccount() {
@@ -39,8 +39,12 @@ const CreateAccount = () => {
                 name="name"
                 value={name}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Div>
+
+            {errors.name && <Error>{errors.name}</Error>}
+
             <Div>
               <label htmlFor="email">Email</label>
               <input
@@ -50,8 +54,12 @@ const CreateAccount = () => {
                 placeholder="Email..."
                 value={email}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Div>
+
+            {errors.email && <Error>{errors.email}</Error>}
+
             <Div>
               <label htmlFor="password">Password</label>
               <input
@@ -61,11 +69,15 @@ const CreateAccount = () => {
                 placeholder="Password..."
                 value={password}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Div>
+
+            {errors.password && <Error>{errors.password}</Error>}
+
             <Submit
               type="submit"
-              value="Create Account"              
+              value="Create Account"
             />
           </Form>
         </>
