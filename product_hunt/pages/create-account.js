@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import { Form, Div, Submit, Error } from "../components/ui/Form";
 import { css } from "@emotion/react";
+import Router from 'next/router';
+
+// Firebase
+import firebase from '../firebase';
 
 // Validations
 import useValidation from "../hooks/useValidation";
@@ -14,11 +18,19 @@ const CreateAccount = () => {
     password: ''
   };
 
-  const { values, errors, submitForm, handleChange, handleSubmit, handleBlur } = useValidation(initialState, validateCreateAccount, createAccount);
+  const [error, setError] = useState(false);
+  const { values, errors, handleChange, handleSubmit, handleBlur } = useValidation(initialState, validateCreateAccount, createAccount);
   const { name, email, password } = values;
 
-  function createAccount() {
-    console.log('Creating an account');
+  async function createAccount() {
+    try {
+      await firebase.createAccount(name, email, password);
+      Router.push('/');
+    } catch (error) {
+      console.error('Something went wrong creating the account', error);
+      let errorMessage = error.message.split(' ').slice(-1).pop().replace('(', '').replace(')', '').toUpperCase();
+      setError(errorMessage);
+    }
   }
 
   return (
@@ -79,6 +91,8 @@ const CreateAccount = () => {
               type="submit"
               value="Create Account"
             />
+
+            {error && <Error>{error}</Error>}
           </Form>
         </>
       </Layout>
