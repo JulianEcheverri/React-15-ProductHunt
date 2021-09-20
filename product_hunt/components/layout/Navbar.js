@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
+import { FirebaseContext } from "../../firebase";
 
 const Nav = styled.nav`
   padding-left: 2rem;
@@ -16,7 +17,7 @@ const Nav = styled.nav`
 `;
 
 const Navbar = () => {
-  const user = true;
+  const {user} = useContext(FirebaseContext);
   return (
     <Nav>
       <Link href="/">
