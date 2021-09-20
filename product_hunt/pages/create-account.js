@@ -9,7 +9,7 @@ import firebase from '../firebase';
 
 // Validations
 import useValidation from "../hooks/useValidation";
-import validateCreateAccount from "../validations/create-account_validationRules";
+import validateCreateAccount from "../validations/create-account.validationRules";
 
 const CreateAccount = () => {
   const initialState = {

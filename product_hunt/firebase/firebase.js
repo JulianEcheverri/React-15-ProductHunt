@@ -4,7 +4,7 @@ import firebaseConfig from './config';
 import { initializeApp } from 'firebase/app';
 
 // Add the Firebase products that you want to use
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 // see= https://firebase.google.com/docs/auth/web/password-auth#web-v9
@@ -23,6 +23,11 @@ class Firebase {
         return await updateProfile(this.auth.currentUser, {
             displayName: name,
         });
+    }
+
+      // Login
+      async logIn(email, password) {
+        return await signInWithEmailAndPassword(this.auth, email, password);
     }
 }
 
