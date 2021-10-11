@@ -9,7 +9,7 @@ import firebase from "../firebase";
 
 // Validations
 import useValidation from "../hooks/useValidation";
-import validateLogIn from "../validations/log-in-validationRules";
+import validateLogIn from "../validations/log-in.validationRules";
 
 const Login = () => {
   const initialState = {

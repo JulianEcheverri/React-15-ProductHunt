@@ -27,7 +27,7 @@ const Navbar = () => {
         <a>Top products</a>
       </Link>
       {user && (
-        <Link href="/new-product">
+        <Link href="/create-product">
           <a>New product</a>
         </Link>
       )}
