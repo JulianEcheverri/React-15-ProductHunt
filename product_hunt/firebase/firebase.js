@@ -1,47 +1,36 @@
+import app from 'firebase/app';
 import firebaseConfig from "./config";
-
-// Firebase App (the core Firebase SDK) is always required and must be listed first
-import { initializeApp } from "firebase/app";
-
-// Add the Firebase products that you want to use
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-  signInWithEmailAndPassword,
-  signOut
-} from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
-// see= https://firebase.google.com/docs/auth/web/password-auth#web-v9
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 class Firebase {
   constructor() {
-    // Initialize Firebase
-    this.firebaseApp = initializeApp(firebaseConfig);
-    this.auth = getAuth();
+    if (!app.apps.length) {
+      app.initializeApp(firebaseConfig)
+    }
+    this.auth = app.auth();
+    this.db = app.firestore();
+    this.storage = app.storage();
   }
 
   // Creates an account
   async createAccount(name, email, password) {
-    const newAccount = await createUserWithEmailAndPassword(
-      this.auth,
-      email,
-      password
-    );
-    return await updateProfile(this.auth.currentUser, {
-      displayName: name,
+    const newAccount = await this.auth.createUserWithEmailAndPassword(email, password);
+    
+    return await newAccount.user.updateProfile({
+      displayName : name
     });
   }
 
   // LogIn
   async logIn(email, password) {
-    return await signInWithEmailAndPassword(this.auth, email, password);
+    return await this.auth.signInWithEmailAndPassword(email, password);
   }
 
   // Log off
   async signOut() {
-    return await signOut(this.auth);
+    await this.auth.signOut();
   }
 }
 
