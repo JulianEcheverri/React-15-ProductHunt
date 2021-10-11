@@ -1,6 +1,6 @@
 ## Product Hunt 
 
-This is a clone site for Product Hunt page. Using Next.js, React & Firebase
+This is a clone site for Product Hunt page. Using Next.js, React & Firebase v8
 
 #### Site
 
@@ -23,5 +23,5 @@ This is a clone site for Product Hunt page. Using Next.js, React & Firebase
 - npm babel-plugin-emotion
 
 ##### Using firebase for db
-- npm install firebase
+- npm i firebase@8.0.1
 - npm i firebase-admin
